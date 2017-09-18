@@ -1,5 +1,13 @@
+/*
+Proyecto: Scraper Evaluacion Konfio
+Author: Miguel Añez
+Fecha creacion: 17/09/2017
+Ultima modificacion: 18/09/2017 *Limpieza de codigo, se agregaron comentarios*
+*/
+
 const mysql = require('mysql');
 
+//Datos de conectividad para iniciar el pool de conexiones
 const pool = mysql.createPool({
   connectionLimit : 100,
   host     : 'localhost',
@@ -9,19 +17,7 @@ const pool = mysql.createPool({
   database : 'scrapper'
 });
 
-// var saveProducts = (products) => {
-// 	connection.connect(function(err) {
-//   		if (err) throw err;
-//   		var sql = "INSERT INTO products_information (Store, Name, Price) VALUES ?";
-//   		connection.query(sql, [products], function (err, result) {
-//     	if (err) throw err;
-//     	console.log("Number of records inserted: " + result.affectedRows);
-//   	});
-
-//   connection.end();
-// });
-// }
-
+//Funcion para guardar en la BD los productos procedentes del scraping
 var saveProducts = (products) => {
 	pool.getConnection(function(err, connection) {
 		if (err) {
@@ -42,6 +38,7 @@ var saveProducts = (products) => {
 	}); 
 }
 
+//Funcion para mostrar los productos almacenados en la BD
 var showProducts = (req, res) => {
 	pool.getConnection(function(err, connection) {
   if (err) {

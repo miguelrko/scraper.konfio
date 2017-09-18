@@ -1,3 +1,10 @@
+/*
+Proyecto: Scraper Evaluacion Konfio
+Author: Miguel Añez
+Fecha creacion: 17/09/2017
+Ultima modificacion: 18/09/2017 *Limpieza de codigo, se agregaron comentarios*
+*/
+
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
@@ -5,6 +12,7 @@ const scrapper = require('../scrapper.js');
 
 var basicAuth = require('basic-auth');
 
+//Funcion para el manejo del Basic Auth
 var auth = function (req, res, next) {
   function unauthorized(res) {
     res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
@@ -26,19 +34,8 @@ var auth = function (req, res, next) {
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-
-// router.get('/sources/', function (req, res) {
-//     User.find({}, function (err, users) {
-//         if (err) return res.status(500).send("There was a problem finding the users.");
-//         res.status(200).send(users);
-//     });
-// });
-
-
-
+//Llamado a la funcion de scraping al recibir un get
 router.get('/', auth, function (req, res) {
-    // console.log('req url: ' + req.query.url);
-    // console.log('req store: ' + req.query.store);
     scrapper.ScrapperProducts(req, res);
 });
 

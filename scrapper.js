@@ -1,8 +1,17 @@
+/*
+Proyecto: Scraper Evaluacion Konfio
+Author: Miguel Añez
+Fecha creacion: 17/09/2017
+Ultima modificacion: 18/09/2017 *Limpieza de codigo, se agregaron comentarios*
+*/
+
 const request = require('request');
 const cheerio = require('cheerio');
 
 const db = require('./data-base.js');
 
+//Funcion para realizar el scraping al url recibido en el request
+//utilizando un path al estilo Jquery en base al almacen origen
 var ScrapperProducts = (req, res)=> {
 	request({
 	url : req.query.url
